@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>OCR Application</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+  @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+.btn { display: inline-block; *display: inline; *zoom: 1; padding: 4px 10px 4px; margin-bottom: 0; font-size: 13px; line-height: 18px; color: #333333; text-align: center;text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75); vertical-align: middle; background-color: #f5f5f5; background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6); background-image: -ms-linear-gradient(top, #ffffff, #e6e6e6); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6)); background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6); background-image: -o-linear-gradient(top, #ffffff, #e6e6e6); background-image: linear-gradient(top, #ffffff, #e6e6e6); background-repeat: repeat-x; filter: progid:dximagetransform.microsoft.gradient(startColorstr=#ffffff, endColorstr=#e6e6e6, GradientType=0); border-color: #e6e6e6 #e6e6e6 #e6e6e6; border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25); border: 1px solid #e6e6e6; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); cursor: pointer; *margin-left: .3em; }
+.btn:hover, .btn:active, .btn.active, .btn.disabled, .btn[disabled] { background-color: #e6e6e6; }
+.btn-large { padding: 9px 15px; font-size: 15px; line-height: normal; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; }
+.btn:hover { color: #333333; text-decoration: none; background-color: #e6e6e6; background-position: 0 -15px; -webkit-transition: background-position 0.1s linear; -moz-transition: background-position 0.1s linear; -ms-transition: background-position 0.1s linear; -o-transition: background-position 0.1s linear; transition: background-position 0.1s linear; }
+.btn-primary, .btn-primary:hover { text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25); color: #ffffff; }     
+.btn-primary.active { color: rgba(255, 255, 255, 0.75); }
+.btn-primary { background-color: #4a77d4; background-image: -moz-linear-gradient(top, #6eb6de, #4a77d4); background-image: -ms-linear-gradient(top, #6eb6de, #4a77d4); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#6eb6de), to(#4a77d4)); background-image: -webkit-linear-gradient(top, #6eb6de, #4a77d4); background-image: -o-linear-gradient(top, #6eb6de, #4a77d4); background-image: linear-gradient(top, #6eb6de, #4a77d4); background-repeat: repeat-x; filter: progid:dximagetransform.microsoft.gradient(startColorstr=#6eb6de, endColorstr=#4a77d4, GradientType=0);  border: 1px solid #3762bc; text-shadow: 1px 1px 1px rgba(0,0,0,0.4); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.5); }
+.btn-primary:hover, .btn-primary:active, .btn-primary.active, .btn-primary.disabled, .btn-primary[disabled] { filter: none; background-color: #4a77d4; }
+.btn-block {  width: 30%; display:block; }
+
+* { -webkit-box-sizing:border-box; -moz-box-sizing:border-box; -ms-box-sizing:border-box; -o-box-sizing:border-box; box-sizing:border-box; }
+
+.navbar {
+  overflow: hidden;
+ padding: 10px;
+  background-color: #333;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar a {
+  float: left;
+  font-size: 26px;
+  color: white;
+  text-align: center;
+  padding: 14px 26px;
+  text-decoration: none;
+}
+
+.dropdown {
+  float: right;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  cursor: pointer;
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 46px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
+  background-color: red;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 8px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+
+}
+
+.show {
+  display: block;
+}
+.big {
+  
+
+  text-align: center;
+  padding: 32px 26px;  
+  resize: both;
+  overflow: auto; 
+}
+.inner{
+  font-size: 10px;
+  margin-top:20px;
+  margin-bottom: 100px;
+  margin-right: 500px;
+  margin-left: 350px;
+  width: 800px;
+  height: 30px;
+}
+.inner1{
+  border: 2px solid;
+  margin-top: 10px;
+  margin-bottom: 60px;
+  margin-right: 500px;
+  margin-left: 210px;
+  width: 1100px;
+  height: 330px;
+  background-color: rgb(0, 191, 255);
+  border-radius: 20px;
+}
+.inner2{
+  
+  border-radius: 20px;
+  margin-top: 23px;
+  margin-right: 220px;
+  margin-left:32px;
+  width: 1035px;
+  height: 285px;
+  background-color: rgb(0, 155, 255)
+  
+  
+}
+h1.one{
+  font-size: 30px;
+  color: black;
+}
+h1.two{
+  font-size: 20px;
+  color: white;
+}
+p.three{
+	font-size: 18px;
+	color: maroon;
+}
+.inner3{
+	
+    
+
+}
+.inner4{	
+	float: right;
+	margin-bottom: 100px;
+	margin-left: 550px;
+
+	width: 530px;
+border: 2px solid;
+}
+.tab{
+		
+}
+.four{
+	border-radius: 30px;
+	background-color: seashell;
+}
+.input1{
+	font-size: 15px;
+}
+
+</style>
+</head>
+<body>
+  <div class="navbar">
+  <a href="login.html"><i class="fa fa-file-image-o fa-2x"></i>OCR APP</a>
+  
+  <div class="dropdown">
+  <button class="dropbtn" onclick="myFunction()">
+    <i class="fa fa-bars fa-3x"></i>
+  </button>
+  <div class="dropdown-content" id="myDropdown">
+    <a href="login.html">Login</a>
+    <a href="main.html">OCR converter</a>
+  </div>
+  </div> 
+</div>
+<div class="big" style="background-color:rgb(0,0,0,0.6) ;background-image: url('backgroun1.jpg');background-repeat: no-repeat;background-size: 1600px">
+	<div class="inner"><h1 class="one"><i class="fa fa-file-word-o fa-2x"></i>Text image to Word Converter</h1>
+    <h1 class="two">Magically convert Images to editable Text files</h1></div>
+ 
+    <div class="inner1"><div class="inner2" align="center"><br><i class="fa fa-file-text fa-5x" ></i><br><br><div class="inner3"><table class="tab" width="1000px" height="110px"><tr><th class="four"><form action="/result2"method="post" enctype="multipart/form-data">
+  
+  <br><input type="file" class="input1" name="myfile" /><br>
+  <p align="center"><button type="submit" class="btn btn-primary btn-block btn-large">Convert</button></p><p class="three">Drop Handwritten images here</p></form></th><th class="four">
+  <form action="/result1"method="post" enctype="multipart/form-data">
+  <br><input type="file" class="input1" name="myfile1">
+  <p align="center"><button type="submit"  class="btn btn-primary btn-block btn-large">Convert</button></p><p class="three">Drop Scanned images here</p>
+</form></th></tr></table></div>
+
+</div></div>
+</div>
+
+
+<script>
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(e) {
+  if (!e.target.matches('.dropbtn')) {
+  var myDropdown = document.getElementById("myDropdown");
+    if (myDropdown.classList.contains('show')) {
+      myDropdown.classList.remove('show');
+    }
+  }
+}
+</script>
+</body>
+</html>
